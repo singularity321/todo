@@ -16,8 +16,8 @@ const initialState: TodosState = {
 export const syncTodos = createAsyncThunk<Todo[], void, { state: RootState }>(
     'todos/sync',
     async () => {
-        const data = await api<{ data?: Todo[] } | Todo[]>('/api/todos');
-        return Array.isArray(data) ? data : data.data ?? [];
+        const data = await api<{ data?: Todo[] }>('/api/todos');
+        return data?.data ?? [];
     }
 );
 
