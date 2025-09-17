@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/', function () {  
+    if (auth()->check()) {
+        return redirect()->route('todos');
+    }
+    
     return Inertia::render('welcome');
 })->name('home');
 

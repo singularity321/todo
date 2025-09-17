@@ -80,6 +80,9 @@ const todosSlice = createSlice({
                 if (todo) {
                     Object.assign(todo, changes);
                 }
+            })
+            .addCase(deleteTodo.pending, (state, action) => {
+                state.items = state.items.filter((todo) => todo.id !== action.meta.arg);
             });
     },
 });
