@@ -72,6 +72,14 @@ const todosSlice = createSlice({
             })
             .addCase(syncTodos.rejected, (state) => {
                 state.status = 'failed';
+            })
+            .addCase(updateTodo.pending, (state, action) => {
+                const { id, changes } = action.meta.arg;
+                const todo = state.items.find((item) => item.id === id);
+
+                if (todo) {
+                    Object.assign(todo, changes);
+                }
             });
     },
 });
