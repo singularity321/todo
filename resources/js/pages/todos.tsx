@@ -63,8 +63,8 @@ export default function Todos() {
             <Head title="Todos" />
             <div className="p-4">
                 <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
-                    <Input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="New todo" className="" />
-                    <Input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="w-40" />
+                    <Input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="New todo" className="flex-1" />
+                    <Input type="date" value={due} onChange={(e) => setDue(e.target.value)} className="w-38" />
                     <Button type="submit">Add</Button>
                 </form>
                 {status === 'loading' && <div>Loading...</div>}
@@ -86,7 +86,7 @@ export default function Todos() {
                                 {editingId === todo.id ? (
                                     <>
                                         <Input value={editText} onChange={(e) => setEditText(e.target.value)} className="flex-1" />
-                                        <Input type="date" value={editDue} onChange={(e) => setEditDue(e.target.value)} className="w-40" />
+                                        <Input type="date" value={editDue} onChange={(e) => setEditDue(e.target.value)} className="w-38" />
                                     </>
                                 ) : (
                                     <div className="flex flex-col">
