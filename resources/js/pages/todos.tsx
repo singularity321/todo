@@ -9,6 +9,7 @@ import type { RootState } from '@/store';
 import { addTodo, deleteTodo, syncTodos, updateTodo } from '@/store/todosSlice';
 import { type BreadcrumbItem, type Todo } from '@/types';
 import { Head } from '@inertiajs/react';
+import { CheckedState } from '@radix-ui/react-checkbox';
 import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -54,6 +55,13 @@ export default function Todos() {
         cancelEditing();
     };
 
+    const handleCheck = (todo: Todo) => (checked: CheckedState) => {
+        dispatch(updateTodo({
+            id: todo.id,
+            changes: { done: checked === true },
+        }))
+    };
+
     useEffect(() => {
         dispatch(syncTodos());
     }, [dispatch]);
@@ -74,14 +82,7 @@ export default function Todos() {
                             <div className="flex flex-1 items-center gap-2">
                                 <Checkbox
                                     checked={todo.done}
-                                    onCheckedChange={(checked) =>
-                                        dispatch(
-                                            updateTodo({
-                                                id: todo.id,
-                                                changes: { done: checked === true },
-                                            }),
-                                        )
-                                    }
+                                    onCheckedChange={handleCheck(todo)}
                                 />
                                 {editingId === todo.id ? (
                                     <>
